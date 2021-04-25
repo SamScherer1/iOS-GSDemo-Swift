@@ -10,6 +10,7 @@
 		080399469B2DBEA6F0789E6D /* libPods-GSDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD01B4A59AB3761414068C5E /* libPods-GSDemo.a */; };
 		3AD98DAE26360529008C47F3 /* AircraftAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */; };
 		3AD98DBB26360EFA008C47F3 /* AircraftAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */; };
+		3AD98DC8263613B3008C47F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DC7263613B3008C47F3 /* AppDelegate.swift */; };
 		A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A402A06F1B4BC22400129605 /* DJIRootViewController.m */; };
 		A402A0741B4BC43800129605 /* DJIMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = A402A0721B4BC43800129605 /* DJIMapController.m */; };
 		A4507F291CB506D40037861C /* DJIGSButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4507F241CB506D40037861C /* DJIGSButtonViewController.m */; };
@@ -17,8 +18,6 @@
 		A4507F2B1CB506D40037861C /* DJIWaypointConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4507F271CB506D40037861C /* DJIWaypointConfigViewController.m */; };
 		A4507F2C1CB506D40037861C /* DJIWaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4507F281CB506D40037861C /* DJIWaypointConfigViewController.xib */; };
 		A4507F301CB506F20037861C /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4507F2F1CB506F20037861C /* DemoUtility.m */; };
-		A4E86B781B4A374300F204DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E86B771B4A374300F204DA /* main.m */; };
-		A4E86B7B1B4A374300F204DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E86B7A1B4A374300F204DA /* AppDelegate.m */; };
 		A4E86B811B4A374300F204DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B7F1B4A374300F204DA /* Main.storyboard */; };
 		A4E86B831B4A374300F204DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B821B4A374300F204DA /* Images.xcassets */; };
 		A4E86B861B4A374300F204DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B841B4A374300F204DA /* LaunchScreen.xib */; };
@@ -30,6 +29,7 @@
 		3AD98DAC26360529008C47F3 /* GSDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotationView.swift; sourceTree = "<group>"; };
 		3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotation.swift; sourceTree = "<group>"; };
+		3AD98DC7263613B3008C47F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B0CAE4A21C1AEFA08AF5AD5 /* Pods-GSDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GSDemo/Pods-GSDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A402A06E1B4BC22400129605 /* DJIRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJIRootViewController.h; sourceTree = "<group>"; };
 		A402A06F1B4BC22400129605 /* DJIRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJIRootViewController.m; sourceTree = "<group>"; };
@@ -46,9 +46,6 @@
 		A4507F2F1CB506F20037861C /* DemoUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoUtility.m; sourceTree = "<group>"; };
 		A4E86B721B4A374300F204DA /* GSDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E86B761B4A374300F204DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A4E86B771B4A374300F204DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A4E86B791B4A374300F204DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A4E86B7A1B4A374300F204DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A4E86B801B4A374300F204DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4E86B821B4A374300F204DA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A4E86B851B4A374300F204DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -115,8 +112,7 @@
 				A44305471DA88CF3009C1370 /* GSDemo.entitlements */,
 				A402A06E1B4BC22400129605 /* DJIRootViewController.h */,
 				A402A06F1B4BC22400129605 /* DJIRootViewController.m */,
-				A4E86B791B4A374300F204DA /* AppDelegate.h */,
-				A4E86B7A1B4A374300F204DA /* AppDelegate.m */,
+				3AD98DC7263613B3008C47F3 /* AppDelegate.swift */,
 				3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */,
 				3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */,
 				A402A0711B4BC43800129605 /* DJIMapController.h */,
@@ -142,7 +138,6 @@
 			children = (
 				0203E5861C9C0B5F00A69BCF /* GSDemo-pch.pch */,
 				A4E86B761B4A374300F204DA /* Info.plist */,
-				A4E86B771B4A374300F204DA /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -302,8 +297,7 @@
 				A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */,
 				A4507F291CB506D40037861C /* DJIGSButtonViewController.m in Sources */,
 				A402A0741B4BC43800129605 /* DJIMapController.m in Sources */,
-				A4E86B7B1B4A374300F204DA /* AppDelegate.m in Sources */,
-				A4E86B781B4A374300F204DA /* main.m in Sources */,
+				3AD98DC8263613B3008C47F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
