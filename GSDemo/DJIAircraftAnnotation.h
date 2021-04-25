@@ -7,12 +7,12 @@
 //
 
 #import <MapKit/MapKit.h>
-#import "DJIAircraftAnnotationView.h"
+#import <GSDemo-Swift.h>
 
 @interface DJIAircraftAnnotation : NSObject<MKAnnotation>
 
 @property(nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property(nonatomic, weak) DJIAircraftAnnotationView* annotationView;
+@property(nonatomic, weak) AircraftAnnotationView* annotationView;
 
 -(id) initWithCoordiante:(CLLocationCoordinate2D)coordinate;
 

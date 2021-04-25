@@ -28,7 +28,7 @@
 -(void) updateHeading:(float)heading
 {
     if (self.annotationView) {
-        [self.annotationView updateHeading:heading];
+        [self.annotationView updateWithHeading:heading];
     }
 }
 

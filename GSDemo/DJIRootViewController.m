@@ -15,7 +15,7 @@
 #import "DJIWaypointConfigViewController.h"
 #import "DemoUtility.h"
 
-#define ENTER_DEBUG_MODE 0
+#define ENTER_DEBUG_MODE 1
 
 @interface DJIRootViewController ()<DJIGSButtonViewControllerDelegate, DJIWaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
 
@@ -126,7 +126,7 @@
     }
     else{
 #if ENTER_DEBUG_MODE
-        [DJISDKManager enableBridgeModeWithBridgeAppIP:@"Please Enter Your Debug ID"];
+        [DJISDKManager enableBridgeModeWithBridgeAppIP:@"192.168.128.169"];
 #else
         [DJISDKManager startConnectionToProduct];
 #endif
@@ -378,7 +378,7 @@
         
     }else if ([annotation isKindOfClass:[DJIAircraftAnnotation class]])
     {
-        DJIAircraftAnnotationView* annoView = [[DJIAircraftAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Aircraft_Annotation"];
+        AircraftAnnotationView *annoView = [[AircraftAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Aircraft_Annotation"];
         ((DJIAircraftAnnotation*)annotation).annotationView = annoView;
         return annoView;
     }
