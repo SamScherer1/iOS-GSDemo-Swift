@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "DJIAircraftAnnotation.h"
+#import <GSDemo-Swift.h>
 
 @interface DJIMapController : NSObject
 
 @property (strong, nonatomic) NSMutableArray *editPoints;
-@property (nonatomic, strong) DJIAircraftAnnotation* aircraftAnnotation;
+@property (nonatomic, strong) AircraftAnnotation* aircraftAnnotation;
 
 /**
  *  Add Waypoints in Map View

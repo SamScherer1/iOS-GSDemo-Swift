@@ -376,10 +376,10 @@
         pinView.pinTintColor = [UIColor purpleColor];
         return pinView;
         
-    }else if ([annotation isKindOfClass:[DJIAircraftAnnotation class]])
+    }else if ([annotation isKindOfClass:[AircraftAnnotation class]])
     {
         AircraftAnnotationView *annoView = [[AircraftAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Aircraft_Annotation"];
-        ((DJIAircraftAnnotation*)annotation).annotationView = annoView;
+        ((AircraftAnnotation*)annotation).annotationView = annoView;
         return annoView;
     }
     

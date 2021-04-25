@@ -7,6 +7,7 @@
 //
 
 #import "DJIMapController.h"
+#import <GSDemo-Swift.h>
 
 @interface DJIMapController ()
 
@@ -59,7 +60,7 @@
 -(void)updateAircraftLocation:(CLLocationCoordinate2D)location withMapView:(MKMapView *)mapView
 {
     if (self.aircraftAnnotation == nil) {
-        self.aircraftAnnotation = [[DJIAircraftAnnotation alloc] initWithCoordiante:location];
+        self.aircraftAnnotation = [[AircraftAnnotation alloc] initWithCoordinate:location];
         [mapView addAnnotation:self.aircraftAnnotation];
     }
     
@@ -69,7 +70,7 @@
 -(void)updateAircraftHeading:(float)heading
 {
     if (self.aircraftAnnotation) {
-        [self.aircraftAnnotation updateHeading:heading];
+        [self.aircraftAnnotation updateWithHeading:heading];
     }
 }
 
