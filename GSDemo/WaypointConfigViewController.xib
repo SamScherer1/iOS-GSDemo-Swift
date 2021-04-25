@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DJIWaypointConfigViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaypointConfigViewController" customModule="GSDemo" customModuleProvider="target">
             <connections>
-                <outlet property="actionSegmentedControl" destination="A3Y-CT-OuG" id="oFO-5r-4dV"/>
-                <outlet property="altitudeTextField" destination="uL9-y3-Xyd" id="yg1-pX-Ady"/>
-                <outlet property="autoFlightSpeedTextField" destination="UZv-T1-PqT" id="YIs-Qr-KNw"/>
-                <outlet property="headingSegmentedControl" destination="XAv-6q-m7L" id="BMO-eA-aDW"/>
-                <outlet property="maxFlightSpeedTextField" destination="aop-RK-6dR" id="kXf-Tl-6b5"/>
+                <outlet property="actionSegmentedControl" destination="A3Y-CT-OuG" id="hdj-Ew-R5u"/>
+                <outlet property="altitudeTextField" destination="uL9-y3-Xyd" id="hxr-ol-IsV"/>
+                <outlet property="autoFlightSpeedTextField" destination="UZv-T1-PqT" id="OgX-P4-ecH"/>
+                <outlet property="headingSegmentedControl" destination="XAv-6q-m7L" id="lGv-38-bS7"/>
+                <outlet property="maxFlightSpeedTextField" destination="aop-RK-6dR" id="Cj3-TY-S7l"/>
                 <outlet property="view" destination="zu1-ci-Ytl" id="KyJ-Ai-1LU"/>
             </connections>
         </placeholder>
@@ -27,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="293"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rss-d0-fyH">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rss-d0-fyH">
                     <rect key="frame" x="200" y="261" width="200" height="32"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -35,10 +30,10 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="finishBtnAction:" destination="-1" eventType="touchUpInside" id="pCk-X8-llq"/>
+                        <action selector="finishBtnAction:" destination="-1" eventType="touchUpInside" id="K4x-Mj-QqZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ous-h6-Nvz">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ous-h6-Nvz">
                     <rect key="frame" x="0.0" y="261" width="199" height="32"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -49,7 +44,7 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="93t-Tp-6bs"/>
+                        <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="iMT-dT-b2V"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="51e-fJ-29r">
@@ -63,7 +58,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uL9-y3-Xyd">
-                    <rect key="frame" x="82" y="38" width="93" height="30"/>
+                    <rect key="frame" x="82" y="34" width="93" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="93" id="XMl-cc-siD"/>
                     </constraints>
@@ -71,7 +66,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action After Finished:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6g8-xY-pXb">
-                    <rect key="frame" x="23" y="115" width="187" height="21"/>
+                    <rect key="frame" x="23" y="119" width="187" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="187" id="aFH-Fc-SLB"/>
                     </constraints>
@@ -123,7 +118,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UZv-T1-PqT">
-                    <rect key="frame" x="306" y="38" width="87" height="30"/>
+                    <rect key="frame" x="294" y="34" width="87" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="87" id="rkm-iD-Nmw"/>
                     </constraints>
@@ -131,7 +126,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Flight Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="sB6-JT-tfW">
-                    <rect key="frame" x="23" y="81" width="118" height="21"/>
+                    <rect key="frame" x="23" y="81" width="118" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="118" id="53Y-fC-MF7"/>
                     </constraints>
@@ -140,7 +135,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="N/A" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aop-RK-6dR">
-                    <rect key="frame" x="150" y="77" width="93" height="30"/>
+                    <rect key="frame" x="150" y="77" width="93" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="93" id="W6E-wC-hiB"/>
                     </constraints>
@@ -148,7 +143,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Flight Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="n1U-gL-nZO">
-                    <rect key="frame" x="186" y="42" width="118" height="21"/>
+                    <rect key="frame" x="186" y="42" width="106" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -198,7 +193,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-74" y="-35"/>
+            <point key="canvasLocation" x="-75.200000000000003" y="-35.532233883058474"/>
         </view>
     </objects>
 </document>

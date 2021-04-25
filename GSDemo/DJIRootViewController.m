@@ -12,16 +12,16 @@
 #import <DJISDK/DJISDK.h>
 #import "DJIMapController.h"
 #import "DJIGSButtonViewController.h"
-#import "DJIWaypointConfigViewController.h"
 #import "DemoUtility.h"
+#import <GSDemo-Swift.h>
 
 #define ENTER_DEBUG_MODE 1
 
-@interface DJIRootViewController ()<DJIGSButtonViewControllerDelegate, DJIWaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
+@interface DJIRootViewController ()<DJIGSButtonViewControllerDelegate, WaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
 
 @property (nonatomic, assign) BOOL isEditingPoints;
 @property (nonatomic, strong) DJIGSButtonViewController *gsButtonVC;
-@property (nonatomic, strong) DJIWaypointConfigViewController *waypointConfigVC;
+@property (nonatomic, strong) WaypointConfigViewController *waypointConfigVC;
 @property (nonatomic, strong) DJIMapController *mapController;
 
 @property(nonatomic, strong) CLLocationManager* locationManager;
@@ -96,7 +96,8 @@
     self.gsButtonVC.delegate = self;
     [self.view addSubview:self.gsButtonVC.view];
     
-    self.waypointConfigVC = [[DJIWaypointConfigViewController alloc] initWithNibName:@"DJIWaypointConfigViewController" bundle:[NSBundle mainBundle]];
+    //self.waypointConfigVC = [[WaypointConfigViewController alloc] initWithNibName:@"WaypointConfigViewController" bundle:[NSBundle mainBundle]];
+    self.waypointConfigVC = [WaypointConfigViewController new];
     self.waypointConfigVC.view.alpha = 0;
     self.waypointConfigVC.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
     
@@ -204,7 +205,7 @@
 
 #pragma mark - DJIWaypointConfigViewControllerDelegate Methods
 
-- (void)cancelBtnActionInDJIWaypointConfigViewController:(DJIWaypointConfigViewController *)waypointConfigVC
+- (void)cancelBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC
 {
     WeakRef(weakSelf);
     
@@ -223,7 +224,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)finishBtnActionInDJIWaypointConfigViewController:(DJIWaypointConfigViewController *)waypointConfigVC
+- (void)finishBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC
 {
     WeakRef(weakSelf);
     
