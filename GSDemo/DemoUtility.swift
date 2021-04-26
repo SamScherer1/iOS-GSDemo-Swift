@@ -19,7 +19,7 @@ class DemoUtility: NSObject {
 //        });
 //    }
     
-    @objc public class func show(result:NSString) {//TODO: convert to string once no ObjC class uses this. Also should I make this a global function like the objc original?
+    public class func show(result:NSString) {//TODO: convert to string once no ObjC class uses this. Also should I make this a global function like the objc original?
         DispatchQueue.main.async {
             let alertViewController = UIAlertController(title: nil, message: result as String, preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default, handler: nil)
@@ -29,22 +29,22 @@ class DemoUtility: NSObject {
         }
     }
     
-    @objc public class func fetchProduct () -> DJIBaseProduct? {
+    public class func fetchProduct () -> DJIBaseProduct? {
         return DJISDKManager.product()
     }
     
-    @objc public class func fetchAircraft () -> DJIAircraft? {
+    public class func fetchAircraft () -> DJIAircraft? {
         return DJISDKManager.product() as? DJIAircraft
     }
     
-    @objc public class func fetchCamera () -> DJICamera? {
+    public class func fetchCamera () -> DJICamera? {
         if let aircraft = DJISDKManager.product() as? DJIAircraft {
             return aircraft.camera
         }
         return nil
     }
     
-    @objc public class func fetchFlightController() -> DJIFlightController? {
+    public class func fetchFlightController() -> DJIFlightController? {
         if let aircraft = DJISDKManager.product() as? DJIAircraft {
             return aircraft.flightController
         }

@@ -13,7 +13,7 @@ import MapKit
 
 class MapController : NSObject {
     
-    @objc var editPoints : [CLLocation]
+    var editPoints : [CLLocation]
     var aircraftAnnotation : AircraftAnnotation?
     
     override init() {
@@ -21,7 +21,7 @@ class MapController : NSObject {
         super.init()
     }
     
-    @objc func add(point:CGPoint, for mapView:MKMapView) {
+    func add(point:CGPoint, for mapView:MKMapView) {
         let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         self.editPoints.append(location)
@@ -30,7 +30,7 @@ class MapController : NSObject {
         mapView.addAnnotation(annotation)
     }
     
-    @objc func cleanAllPoints(with mapView: MKMapView) {
+    func cleanAllPoints(with mapView: MKMapView) {
         self.editPoints.removeAll()
         let annotations = [MKAnnotation].init(mapView.annotations)
         for annotation : MKAnnotation in annotations {
@@ -40,7 +40,7 @@ class MapController : NSObject {
         }
     }
     
-    @objc func updateAircraft(location:CLLocationCoordinate2D, with mapView:MKMapView) {
+    func updateAircraft(location:CLLocationCoordinate2D, with mapView:MKMapView) {
         if self.aircraftAnnotation == nil {
             self.aircraftAnnotation = AircraftAnnotation(coordinate: location)
             mapView.addAnnotation(self.aircraftAnnotation!)
@@ -49,7 +49,7 @@ class MapController : NSObject {
         }
     }
     
-    @objc func updateAircraftHeading(heading:Float) {
+    func updateAircraftHeading(heading:Float) {
         if let _ = self.aircraftAnnotation {
             self.aircraftAnnotation!.update(heading: heading)
         }

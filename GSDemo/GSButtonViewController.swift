@@ -9,72 +9,39 @@
 import Foundation
 import UIKit
 
-@objc enum GSViewMode : Int {
+enum GSViewMode {
     case view
     case edit
 }
 
-@objc protocol GSButtonViewControllerDelegate : class{ //TODO: remove @objc tags
-    //- (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)clearBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)focusMapBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)addBtn:(UIButton *)button withActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)configBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    //- (void)switchToMode:(DJIGSViewMode)mode inGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
-    @objc func stopBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func clearBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func focusMapBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func startBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func add(button:UIButton, actionIn gsBtnVC:GSButtonViewController)
-    @objc func configBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func switchTo(mode:GSViewMode, inGSBtnVC:GSButtonViewController)
-
+protocol GSButtonViewControllerDelegate : class{
+    func stopBtnActionIn(gsBtnVC:GSButtonViewController)
+    func clearBtnActionIn(gsBtnVC:GSButtonViewController)
+    func focusMapBtnActionIn(gsBtnVC:GSButtonViewController)
+    func startBtnActionIn(gsBtnVC:GSButtonViewController)
+    func add(button:UIButton, actionIn gsBtnVC:GSButtonViewController)
+    func configBtnActionIn(gsBtnVC:GSButtonViewController)
+    func switchTo(mode:GSViewMode, inGSBtnVC:GSButtonViewController)
 }
 
-@objc class GSButtonViewController : UIViewController {
-    //@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+class GSButtonViewController : UIViewController {
     @IBOutlet weak var backBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *stopBtn;
     @IBOutlet weak var stopBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *clearBtn;
     @IBOutlet weak var clearBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *focusMapBtn;
     @IBOutlet weak var focusMapBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *editBtn;
     @IBOutlet weak var editBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *startBtn;
     @IBOutlet weak var startBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *addBtn;
     @IBOutlet weak var addBtn: UIButton!
-    //@property (weak, nonatomic) IBOutlet UIButton *configBtn;
     @IBOutlet weak var configBtn: UIButton!
-    //@property (assign, nonatomic) DJIGSViewMode mode;
     var mode = GSViewMode.edit
-    //@property (weak, nonatomic) id <DJIGSButtonViewControllerDelegate> delegate;
-    @objc var delegate : GSButtonViewControllerDelegate?
+    var delegate : GSButtonViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: need to set initial mode after super call?
     }
     
-    
-    //#pragma mark - Property Method
-    //
-    //- (void)setMode:(DJIGSViewMode)mode
-    //{
-    //
-    //    _mode = mode;
-    //    [_editBtn setHidden:(mode == DJIGSViewMode_EditMode)];
-    //    [_focusMapBtn setHidden:(mode == DJIGSViewMode_EditMode)];
-    //    [_backBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //    [_clearBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //    [_startBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //    [_stopBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //    [_addBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //    [_configBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    //}
+    //MARK - Property Method
     func setMode(mode:GSViewMode) {
         self.mode = mode
         self.editBtn.isHidden = (mode == GSViewMode.edit)
@@ -88,7 +55,6 @@ import UIKit
     }
         
     //MARK - IBAction Methods
-    
     @IBAction func backBtnAction(_ sender: Any) {
         self.setMode(mode: GSViewMode.view)
         self.delegate?.switchTo(mode: self.mode, inGSBtnVC: self)

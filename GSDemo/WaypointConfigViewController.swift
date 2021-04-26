@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-@objc protocol WaypointConfigViewControllerDelegate : class {//TODO: remove @objc tag
+protocol WaypointConfigViewControllerDelegate : class {
     //TODO: static funcs only? why? Also, can use properties with {get} only?
-    @objc func cancelBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
-    @objc func finishBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
+    func cancelBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
+    func finishBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
 }
 
 class WaypointConfigViewController : UIViewController {
@@ -22,7 +22,7 @@ class WaypointConfigViewController : UIViewController {
     @IBOutlet weak var actionSegmentedControl: UISegmentedControl!
     @IBOutlet weak var headingSegmentedControl: UISegmentedControl!
 
-    @objc weak var delegate : WaypointConfigViewControllerDelegate?
+    weak var delegate : WaypointConfigViewControllerDelegate?
     
     init() {
         super.init(nibName: "WaypointConfigViewController", bundle: Bundle.main)
