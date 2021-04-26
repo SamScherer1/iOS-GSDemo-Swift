@@ -10,16 +10,15 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <DJISDK/DJISDK.h>
-#import "DJIGSButtonViewController.h"
 #import "DemoUtility.h"
 #import <GSDemo-Swift.h>
 
 #define ENTER_DEBUG_MODE 1
 
-@interface DJIRootViewController ()<DJIGSButtonViewControllerDelegate, WaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
+@interface DJIRootViewController ()<GSButtonViewControllerDelegate, WaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
 
 @property (nonatomic, assign) BOOL isEditingPoints;
-@property (nonatomic, strong) DJIGSButtonViewController *gsButtonVC;
+@property (nonatomic, strong) GSButtonViewController *gsButtonVC;
 @property (nonatomic, strong) WaypointConfigViewController *waypointConfigVC;
 @property (nonatomic, strong) MapController *mapController;
 
@@ -90,7 +89,7 @@
     self.hsLabel.text = @"0.0 M/S";
     self.altitudeLabel.text = @"0 M";
     
-    self.gsButtonVC = [[DJIGSButtonViewController alloc] initWithNibName:@"DJIGSButtonViewController" bundle:[NSBundle mainBundle]];
+    self.gsButtonVC = [[GSButtonViewController alloc] initWithNibName:@"GSButtonViewController" bundle:[NSBundle mainBundle]];
     [self.gsButtonVC.view setFrame:CGRectMake(0, self.topBarView.frame.origin.y + self.topBarView.frame.size.height, self.gsButtonVC.view.frame.size.width, self.gsButtonVC.view.frame.size.height)];
     self.gsButtonVC.delegate = self;
     [self.view addSubview:self.gsButtonVC.view];
@@ -272,7 +271,7 @@
 
 #pragma mark - DJIGSButtonViewController Delegate Methods
 
-- (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)stopBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
@@ -287,18 +286,18 @@
     
 }
 
-- (void)clearBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)clearBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     //[self.mapController cleanAllPointsWithMapView:self.mapView];
     [self.mapController cleanAllPointsWith:self.mapView];
 }
 
-- (void)focusMapBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)focusMapBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     [self focusMap];
 }
 
-- (void)configBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)configBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     WeakRef(weakSelf);
     
@@ -330,7 +329,7 @@
     
 }
 
-- (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)startBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
@@ -343,15 +342,15 @@
     
 }
 
-- (void)switchToMode:(DJIGSViewMode)mode inGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)switchToMode:(GSViewMode)mode inGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
-    if (mode == DJIGSViewMode_EditMode) {
+    if (mode == GSViewModeEdit) {
         [self focusMap];
     }
     
 }
 
-- (void)addBtn:(UIButton *)button withActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)addBtn:(UIButton *)button withActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
 {
     if (self.isEditingPoints) {
         self.isEditingPoints = NO;
