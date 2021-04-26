@@ -16,10 +16,8 @@
 		3AD98DDE263737F8008C47F3 /* GSButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DDD263737F8008C47F3 /* GSButtonViewController.swift */; };
 		3AD98DE326374A3D008C47F3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DE226374A3D008C47F3 /* RootViewController.swift */; };
 		3AD98DE726375836008C47F3 /* DemoUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DE626375836008C47F3 /* DemoUtility.swift */; };
-		A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A402A06F1B4BC22400129605 /* DJIRootViewController.m */; };
 		A4507F2A1CB506D40037861C /* GSButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4507F251CB506D40037861C /* GSButtonViewController.xib */; };
 		A4507F2C1CB506D40037861C /* WaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4507F281CB506D40037861C /* WaypointConfigViewController.xib */; };
-		A4507F301CB506F20037861C /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4507F2F1CB506F20037861C /* DemoUtility.m */; };
 		A4E86B811B4A374300F204DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B7F1B4A374300F204DA /* Main.storyboard */; };
 		A4E86B831B4A374300F204DA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B821B4A374300F204DA /* Images.xcassets */; };
 		A4E86B861B4A374300F204DA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E86B841B4A374300F204DA /* LaunchScreen.xib */; };
@@ -28,7 +26,6 @@
 
 /* Begin PBXFileReference section */
 		0203E5861C9C0B5F00A69BCF /* GSDemo-pch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSDemo-pch.pch"; sourceTree = "<group>"; };
-		3AD98DAC26360529008C47F3 /* GSDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotationView.swift; sourceTree = "<group>"; };
 		3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotation.swift; sourceTree = "<group>"; };
 		3AD98DC7263613B3008C47F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,12 +35,9 @@
 		3AD98DE226374A3D008C47F3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		3AD98DE626375836008C47F3 /* DemoUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUtility.swift; sourceTree = "<group>"; };
 		5B0CAE4A21C1AEFA08AF5AD5 /* Pods-GSDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GSDemo/Pods-GSDemo.release.xcconfig"; sourceTree = "<group>"; };
-		A402A06F1B4BC22400129605 /* DJIRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJIRootViewController.m; sourceTree = "<group>"; };
 		A44305471DA88CF3009C1370 /* GSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GSDemo.entitlements; sourceTree = "<group>"; };
 		A4507F251CB506D40037861C /* GSButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSButtonViewController.xib; sourceTree = "<group>"; };
 		A4507F281CB506D40037861C /* WaypointConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaypointConfigViewController.xib; sourceTree = "<group>"; };
-		A4507F2E1CB506F20037861C /* DemoUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoUtility.h; sourceTree = "<group>"; };
-		A4507F2F1CB506F20037861C /* DemoUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoUtility.m; sourceTree = "<group>"; };
 		A4E86B721B4A374300F204DA /* GSDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E86B761B4A374300F204DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4E86B801B4A374300F204DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,15 +72,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A4507F2D1CB506F20037861C /* DemoUtility */ = {
-			isa = PBXGroup;
-			children = (
-				A4507F2E1CB506F20037861C /* DemoUtility.h */,
-				A4507F2F1CB506F20037861C /* DemoUtility.m */,
-			);
-			path = DemoUtility;
-			sourceTree = "<group>";
-		};
 		A4E86B691B4A374300F204DA = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				A44305471DA88CF3009C1370 /* GSDemo.entitlements */,
-				A402A06F1B4BC22400129605 /* DJIRootViewController.m */,
 				3AD98DE226374A3D008C47F3 /* RootViewController.swift */,
 				3AD98DC7263613B3008C47F3 /* AppDelegate.swift */,
 				3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */,
@@ -123,9 +107,7 @@
 				A4E86B7F1B4A374300F204DA /* Main.storyboard */,
 				A4E86B821B4A374300F204DA /* Images.xcassets */,
 				A4E86B841B4A374300F204DA /* LaunchScreen.xib */,
-				A4507F2D1CB506F20037861C /* DemoUtility */,
 				A4E86B751B4A374300F204DA /* Supporting Files */,
-				3AD98DAC26360529008C47F3 /* GSDemo-Bridging-Header.h */,
 				3AD98DE626375836008C47F3 /* DemoUtility.swift */,
 			);
 			path = GSDemo;
@@ -288,12 +270,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4507F301CB506F20037861C /* DemoUtility.m in Sources */,
 				3AD98DE726375836008C47F3 /* DemoUtility.swift in Sources */,
 				3AD98DAE26360529008C47F3 /* AircraftAnnotationView.swift in Sources */,
 				3AD98DE326374A3D008C47F3 /* RootViewController.swift in Sources */,
 				3AD98DBB26360EFA008C47F3 /* AircraftAnnotation.swift in Sources */,
-				A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */,
 				3AD98DCD26361569008C47F3 /* WaypointConfigViewController.swift in Sources */,
 				3AD98DDE263737F8008C47F3 /* GSButtonViewController.swift in Sources */,
 				3AD98DD326362669008C47F3 /* MapController.swift in Sources */,
@@ -422,7 +402,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DJISwiftDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GSDemo/GSDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -445,7 +424,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DJISwiftDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GSDemo/GSDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
