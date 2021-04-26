@@ -271,7 +271,7 @@
 
 #pragma mark - DJIGSButtonViewController Delegate Methods
 
-- (void)stopBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
+- (void)stopBtnActionInGsButtonVC:(GSButtonViewController *)GSBtnVC
 {
     [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
@@ -286,18 +286,17 @@
     
 }
 
-- (void)clearBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
+- (void)clearBtnActionInGsButtonVC:(GSButtonViewController *)GSBtnVC
 {
     //[self.mapController cleanAllPointsWithMapView:self.mapView];
     [self.mapController cleanAllPointsWith:self.mapView];
 }
 
-- (void)focusMapBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
-{
+- (void)focusMapBtnActionInGsBtnVC:(GSButtonViewController *)GSBtnVC {
     [self focusMap];
 }
 
-- (void)configBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
+- (void)configBtnActionInGsButtonVC:(GSButtonViewController *)GSBtnVC
 {
     WeakRef(weakSelf);
     
@@ -329,7 +328,7 @@
     
 }
 
-- (void)startBtnActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
+- (void)startBtnActionInGsButtonVC:(GSButtonViewController *)GSBtnVC
 {
     [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
@@ -342,16 +341,14 @@
     
 }
 
-- (void)switchToMode:(GSViewMode)mode inGSButtonVC:(GSButtonViewController *)GSBtnVC
-{
+- (void)switchToMode:(GSViewMode)mode inGSButtonVC:(GSButtonViewController *)GSBtnVC {
     if (mode == GSViewModeEdit) {
         [self focusMap];
     }
     
 }
 
-- (void)addBtn:(UIButton *)button withActionInGSButtonVC:(GSButtonViewController *)GSBtnVC
-{
+- (void)addBtn:(UIButton *)button withActionInGsButtonVC:(GSButtonViewController *)GSBtnVC {
     if (self.isEditingPoints) {
         self.isEditingPoints = NO;
         [button setTitle:@"Add" forState:UIControlStateNormal];
