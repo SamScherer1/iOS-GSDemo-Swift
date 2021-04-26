@@ -152,6 +152,7 @@
     
 }
 
+
 #pragma mark action Methods
 
 -(DJIWaypointMissionOperator *)missionOperator {
@@ -204,15 +205,24 @@
 
 #pragma mark - DJIWaypointConfigViewControllerDelegate Methods
 
-- (void)cancelBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC
-{
+//- (void)cancelBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC
+//{
+//    WeakRef(weakSelf);
+//
+//    [UIView animateWithDuration:0.25 animations:^{
+//        WeakReturn(weakSelf);
+//        weakSelf.waypointConfigVC.view.alpha = 0;
+//    }];
+//
+//}
+
+- (void)cancelBtnActionInDJIWaypointConfigViewControllerWithViewController:(WaypointConfigViewController * _Nonnull)viewController {
     WeakRef(weakSelf);
     
     [UIView animateWithDuration:0.25 animations:^{
         WeakReturn(weakSelf);
         weakSelf.waypointConfigVC.view.alpha = 0;
     }];
-    
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
@@ -223,8 +233,52 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)finishBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC
-{
+- (void)finishBtnActionInDJIWaypointConfigViewController:(WaypointConfigViewController *)waypointConfigVC {
+//    WeakRef(weakSelf);
+//
+//    [UIView animateWithDuration:0.25 animations:^{
+//        WeakReturn(weakSelf);
+//        weakSelf.waypointConfigVC.view.alpha = 0;
+//    }];
+//
+//    for (int i = 0; i < self.waypointMission.waypointCount; i++) {
+//        DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
+//        waypoint.altitude = [self.waypointConfigVC.altitudeTextField.text floatValue];
+//    }
+//
+//    self.waypointMission.maxFlightSpeed = [self.waypointConfigVC.maxFlightSpeedTextField.text floatValue];
+//    self.waypointMission.autoFlightSpeed = [self.waypointConfigVC.autoFlightSpeedTextField.text floatValue];
+//    self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
+//    [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
+//
+//    [[self missionOperator] loadMission:self.waypointMission];
+//
+//    WeakRef(target);
+//
+//    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+//
+//        WeakReturn(target);
+//
+//        if (error) {
+//            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
+//        }
+//        else {
+//            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
+//        }
+//    }];
+//
+//    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
+//        if (error){
+//            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+//            ShowMessage(@"", uploadError, nil, @"OK");
+//        }else {
+//            ShowMessage(@"", @"Upload Mission Finished", nil, @"OK");
+//        }
+//    }];
+    
+}
+
+- (void)finishBtnActionInDJIWaypointConfigViewControllerWithViewController:(WaypointConfigViewController * _Nonnull)viewController {
     WeakRef(weakSelf);
     
     [UIView animateWithDuration:0.25 animations:^{
@@ -241,7 +295,7 @@
     self.waypointMission.autoFlightSpeed = [self.waypointConfigVC.autoFlightSpeedTextField.text floatValue];
     self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
     [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
-
+    
     [[self missionOperator] loadMission:self.waypointMission];
     
     WeakRef(target);
@@ -257,7 +311,7 @@
             [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
         }
     }];
-
+    
     [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
             NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
@@ -266,7 +320,6 @@
             ShowMessage(@"", @"Upload Mission Finished", nil, @"OK");
         }
     }];
-    
 }
 
 #pragma mark - DJIGSButtonViewController Delegate Methods
@@ -281,7 +334,7 @@
         {
             ShowMessage(@"", @"Stop Mission Finished", nil, @"OK");
         }
-
+        
     }];
     
 }
@@ -295,6 +348,7 @@
 - (void)focusMapBtnActionInGsBtnVC:(GSButtonViewController *)GSBtnVC {
     [self focusMap];
 }
+
 
 - (void)configBtnActionInGsButtonVC:(GSButtonViewController *)GSBtnVC
 {
@@ -401,6 +455,7 @@
     //[self.mapController updateAircraftHeading:radianYaw];
     [self.mapController updateAircraftHeadingWithHeading:radianYaw];
 }
+
 
 
 @end
