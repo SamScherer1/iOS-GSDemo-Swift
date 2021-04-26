@@ -14,6 +14,8 @@
 		3AD98DCD26361569008C47F3 /* WaypointConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DCC26361569008C47F3 /* WaypointConfigViewController.swift */; };
 		3AD98DD326362669008C47F3 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DD226362669008C47F3 /* MapController.swift */; };
 		3AD98DDE263737F8008C47F3 /* GSButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DDD263737F8008C47F3 /* GSButtonViewController.swift */; };
+		3AD98DE326374A3D008C47F3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DE226374A3D008C47F3 /* RootViewController.swift */; };
+		3AD98DE726375836008C47F3 /* DemoUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD98DE626375836008C47F3 /* DemoUtility.swift */; };
 		A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A402A06F1B4BC22400129605 /* DJIRootViewController.m */; };
 		A4507F2A1CB506D40037861C /* GSButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4507F251CB506D40037861C /* GSButtonViewController.xib */; };
 		A4507F2C1CB506D40037861C /* WaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4507F281CB506D40037861C /* WaypointConfigViewController.xib */; };
@@ -33,8 +35,9 @@
 		3AD98DCC26361569008C47F3 /* WaypointConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointConfigViewController.swift; sourceTree = "<group>"; };
 		3AD98DD226362669008C47F3 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		3AD98DDD263737F8008C47F3 /* GSButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSButtonViewController.swift; sourceTree = "<group>"; };
+		3AD98DE226374A3D008C47F3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		3AD98DE626375836008C47F3 /* DemoUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUtility.swift; sourceTree = "<group>"; };
 		5B0CAE4A21C1AEFA08AF5AD5 /* Pods-GSDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GSDemo/Pods-GSDemo.release.xcconfig"; sourceTree = "<group>"; };
-		A402A06E1B4BC22400129605 /* DJIRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJIRootViewController.h; sourceTree = "<group>"; };
 		A402A06F1B4BC22400129605 /* DJIRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJIRootViewController.m; sourceTree = "<group>"; };
 		A44305471DA88CF3009C1370 /* GSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GSDemo.entitlements; sourceTree = "<group>"; };
 		A4507F251CB506D40037861C /* GSButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSButtonViewController.xib; sourceTree = "<group>"; };
@@ -107,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				A44305471DA88CF3009C1370 /* GSDemo.entitlements */,
-				A402A06E1B4BC22400129605 /* DJIRootViewController.h */,
 				A402A06F1B4BC22400129605 /* DJIRootViewController.m */,
+				3AD98DE226374A3D008C47F3 /* RootViewController.swift */,
 				3AD98DC7263613B3008C47F3 /* AppDelegate.swift */,
 				3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */,
 				3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */,
@@ -123,6 +126,7 @@
 				A4507F2D1CB506F20037861C /* DemoUtility */,
 				A4E86B751B4A374300F204DA /* Supporting Files */,
 				3AD98DAC26360529008C47F3 /* GSDemo-Bridging-Header.h */,
+				3AD98DE626375836008C47F3 /* DemoUtility.swift */,
 			);
 			path = GSDemo;
 			sourceTree = "<group>";
@@ -285,7 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4507F301CB506F20037861C /* DemoUtility.m in Sources */,
+				3AD98DE726375836008C47F3 /* DemoUtility.swift in Sources */,
 				3AD98DAE26360529008C47F3 /* AircraftAnnotationView.swift in Sources */,
+				3AD98DE326374A3D008C47F3 /* RootViewController.swift in Sources */,
 				3AD98DBB26360EFA008C47F3 /* AircraftAnnotation.swift in Sources */,
 				A402A0701B4BC22400129605 /* DJIRootViewController.m in Sources */,
 				3AD98DCD26361569008C47F3 /* WaypointConfigViewController.swift in Sources */,

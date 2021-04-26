@@ -26,7 +26,7 @@ import UIKit
     @objc func clearBtnActionIn(gsBtnVC:GSButtonViewController)
     @objc func focusMapBtnActionIn(gsBtnVC:GSButtonViewController)
     @objc func startBtnActionIn(gsBtnVC:GSButtonViewController)
-    @objc func add(button:UIButton, withActionIn gsBtnVC:GSButtonViewController)
+    @objc func add(button:UIButton, actionIn gsBtnVC:GSButtonViewController)
     @objc func configBtnActionIn(gsBtnVC:GSButtonViewController)
     @objc func switchTo(mode:GSViewMode, inGSBtnVC:GSButtonViewController)
 
@@ -135,7 +135,7 @@ import UIKit
         //    if ([_delegate respondsToSelector:@selector(addBtn:withActionInGSButtonVC:)]) {
         //        [_delegate addBtn:self.addBtn withActionInGSButtonVC:self];
         //    }
-        self.delegate?.add(button: self.addBtn, withActionIn: self)
+        self.delegate?.add(button: self.addBtn, actionIn: self)
     }
     
 

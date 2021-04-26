@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="DJIRootViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RootViewController" customModule="GSDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -24,7 +22,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gkc-2y-dBR">
                                 <rect key="frame" x="0.0" y="72" width="667" height="303"/>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="f45-gf-bRE"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="m55-aS-Hui"/>
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdE-bu-rKa" userLabel="top bar">
@@ -128,14 +126,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="altitudeLabel" destination="XlO-A1-74V" id="TDA-yZ-A3I"/>
-                        <outlet property="gpsLabel" destination="nRm-HP-kS1" id="OHZ-uq-C4a"/>
-                        <outlet property="hsLabel" destination="lqV-hZ-fjF" id="XLN-T6-cxM"/>
-                        <outlet property="mapView" destination="gkc-2y-dBR" id="aHB-ri-bcH"/>
-                        <outlet property="modeLabel" destination="cG7-Je-amU" id="hXb-RJ-Lzt"/>
-                        <outlet property="topBarView" destination="tdE-bu-rKa" id="5Lf-oc-iWx"/>
+                        <outlet property="altitudeLabel" destination="XlO-A1-74V" id="dpO-ZN-ASN"/>
+                        <outlet property="gpsLabel" destination="nRm-HP-kS1" id="c73-Ya-67f"/>
+                        <outlet property="hsLabel" destination="lqV-hZ-fjF" id="9GD-hm-zgy"/>
+                        <outlet property="mapView" destination="gkc-2y-dBR" id="LAv-wO-8Ey"/>
+                        <outlet property="modeLabel" destination="cG7-Je-amU" id="Cbl-Ae-832"/>
+                        <outlet property="topBarView" destination="tdE-bu-rKa" id="img-Va-nhT"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="3Be-UJ-oj8"/>
-                        <outlet property="vsLabel" destination="dNl-C9-FhW" id="orv-FH-3a7"/>
+                        <outlet property="vsLabel" destination="dNl-C9-FhW" id="ZNh-PC-vbi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
