@@ -198,8 +198,7 @@
     
     if(tapGesture.state == UIGestureRecognizerStateEnded){
         if (self.isEditingPoints) {
-            //[self.mapController addPoint:point withMapView:self.mapView];
-            [self.mapController addWithPoint:point withMapView:self.mapView];
+            [self.mapController addWithPoint:point for:self.mapView];
         }
     }
 }
