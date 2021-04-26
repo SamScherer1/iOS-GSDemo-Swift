@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <DJISDK/DJISDK.h>
-#import "DJIMapController.h"
 #import "DJIGSButtonViewController.h"
 #import "DemoUtility.h"
 #import <GSDemo-Swift.h>
@@ -22,7 +21,7 @@
 @property (nonatomic, assign) BOOL isEditingPoints;
 @property (nonatomic, strong) DJIGSButtonViewController *gsButtonVC;
 @property (nonatomic, strong) WaypointConfigViewController *waypointConfigVC;
-@property (nonatomic, strong) DJIMapController *mapController;
+@property (nonatomic, strong) MapController *mapController;
 
 @property(nonatomic, strong) CLLocationManager* locationManager;
 @property(nonatomic, assign) CLLocationCoordinate2D userLocation;
@@ -78,7 +77,7 @@
     self.userLocation = kCLLocationCoordinate2DInvalid;
     self.droneLocation = kCLLocationCoordinate2DInvalid;
     
-    self.mapController = [[DJIMapController alloc] init];
+    self.mapController = [[MapController alloc] init];
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addWaypoints:)];
     [self.mapView addGestureRecognizer:self.tapGesture];
 }
@@ -198,8 +197,10 @@
     CGPoint point = [tapGesture locationInView:self.mapView];
     
     if(tapGesture.state == UIGestureRecognizerStateEnded){
-         if (self.isEditingPoints)
-            [self.mapController addPoint:point withMapView:self.mapView];
+        if (self.isEditingPoints) {
+            //[self.mapController addPoint:point withMapView:self.mapView];
+            [self.mapController addWithPoint:point withMapView:self.mapView];
+        }
     }
 }
 
@@ -289,7 +290,8 @@
 
 - (void)clearBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
 {
-    [self.mapController cleanAllPointsWithMapView:self.mapView];
+    //[self.mapController cleanAllPointsWithMapView:self.mapView];
+    [self.mapController cleanAllPointsWith:self.mapView];
 }
 
 - (void)focusMapBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
@@ -301,7 +303,7 @@
 {
     WeakRef(weakSelf);
     
-    NSArray* wayPoints = self.mapController.wayPoints;
+    NSArray* wayPoints = self.mapController.editPoints;
     if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
         ShowMessage(@"No or not enough waypoints for mission", @"", nil, @"OK");
         return;
@@ -398,9 +400,11 @@
     self.hsLabel.text = [NSString stringWithFormat:@"%0.1f M/S",(sqrtf(state.velocityX*state.velocityX + state.velocityY*state.velocityY))];
     self.altitudeLabel.text = [NSString stringWithFormat:@"%0.1f M",state.altitude];
     
-    [self.mapController updateAircraftLocation:self.droneLocation withMapView:self.mapView];
+    //[self.mapController updateAircraftLocation:self.droneLocation withMapView:self.mapView];
+    [self.mapController updateAircraftWithLocation:self.droneLocation with:self.mapView];
     double radianYaw = RADIAN(state.attitude.yaw);
-    [self.mapController updateAircraftHeading:radianYaw];
+    //[self.mapController updateAircraftHeading:radianYaw];
+    [self.mapController updateAircraftHeadingWithHeading:radianYaw];
 }
 
 
