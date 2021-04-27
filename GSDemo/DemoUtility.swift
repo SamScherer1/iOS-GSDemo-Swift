@@ -8,6 +8,10 @@
 import Foundation
 import DJISDK
 
+extension FloatingPoint {
+    var degreesToRadians: Self { self * .pi / 180 }
+}
+
 class DemoUtility: NSObject {
     
     //TODO: is this more complicated show result function necessary?
@@ -19,7 +23,7 @@ class DemoUtility: NSObject {
 //        });
 //    }
     
-    public class func show(result:NSString) {//TODO: convert to string once no ObjC class uses this. Also should I make this a global function like the objc original?
+    public class func show(result:String) {//TODO: should I make this a global function like the objc original?
         DispatchQueue.main.async {
             let alertViewController = UIAlertController(title: nil, message: result as String, preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default, handler: nil)
@@ -27,21 +31,6 @@ class DemoUtility: NSObject {
             let navController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
             navController.present(alertViewController, animated: true, completion: nil)
         }
-    }
-    
-    public class func fetchProduct () -> DJIBaseProduct? {
-        return DJISDKManager.product()
-    }
-    
-    public class func fetchAircraft () -> DJIAircraft? {
-        return DJISDKManager.product() as? DJIAircraft
-    }
-    
-    public class func fetchCamera () -> DJICamera? {
-        if let aircraft = DJISDKManager.product() as? DJIAircraft {
-            return aircraft.camera
-        }
-        return nil
     }
     
     public class func fetchFlightController() -> DJIFlightController? {

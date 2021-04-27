@@ -16,10 +16,11 @@ import DJISDK
 class RootViewController : UIViewController, GSButtonViewControllerDelegate, WaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate {
     
     fileprivate let useBridgeMode = true
+    fileprivate let bridgeIPString = "192.168.128.169"
     
     //
     //@property (nonatomic, assign) BOOL isEditingPoints;
-    var isEditingPoints : Bool?
+    var isEditingPoints = false
     //@property (nonatomic, strong) GSButtonViewController *gsButtonVC;
     var gsButtonVC : GSButtonViewController?
     //@property (nonatomic, strong) WaypointConfigViewController *waypointConfigVC;
@@ -76,40 +77,62 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
 
     //MARK:  Init Methods
     func initData() {
-    //    self.userLocation = kCLLocationCoordinate2DInvalid;
-    //    self.droneLocation = kCLLocationCoordinate2DInvalid;
-    //
-    //    self.mapController = [[MapController alloc] init];
-    //    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addWaypoints:)];
-    //    [self.mapView addGestureRecognizer:self.tapGesture];
+        self.userLocation = kCLLocationCoordinate2DInvalid
+        self.droneLocation = kCLLocationCoordinate2DInvalid
+        self.mapController = MapController()
+        self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(addWaypints(tapGesture:)))
+        self.mapView.addGestureRecognizer(self.tapGesture!)//TODO: reconsider force unwrap
+        
     }
     
     func initUI() {
-    //    self.modeLabel.text = @"N/A";
-    //    self.gpsLabel.text = @"0";
-    //    self.vsLabel.text = @"0.0 M/S";
-    //    self.hsLabel.text = @"0.0 M/S";
-    //    self.altitudeLabel.text = @"0 M";
+        self.modeLabel.text = "N/A"
+        self.gpsLabel.text = "0"
+        self.vsLabel.text = "0.0 M/S"
+        self.hsLabel.text = "0.0 M/S"
+        self.altitudeLabel.text = "0 M"
     //
     //    self.gsButtonVC = [[GSButtonViewController alloc] initWithNibName:@"GSButtonViewController" bundle:[NSBundle mainBundle]];
     //    [self.gsButtonVC.view setFrame:CGRectMake(0, self.topBarView.frame.origin.y + self.topBarView.frame.size.height, self.gsButtonVC.view.frame.size.width, self.gsButtonVC.view.frame.size.height)];
     //    self.gsButtonVC.delegate = self;
     //    [self.view addSubview:self.gsButtonVC.view];
-    //
-    //    //self.waypointConfigVC = [[WaypointConfigViewController alloc] initWithNibName:@"WaypointConfigViewController" bundle:[NSBundle mainBundle]];
-    //    self.waypointConfigVC = [WaypointConfigViewController new];
+        
+        //TODO: make a designated init for GSButtonViewController so as to not break encapsulation...
+        self.gsButtonVC = GSButtonViewController(nibName:"GSButtonViewController", bundle:Bundle.main)
+        if self.gsButtonVC != nil {//TODO: reconsider method of unwrapping property
+            self.gsButtonVC!.view.frame = CGRect(x: 0.0,
+                                                 y: self.topBarView.frame.origin.y + self.topBarView.frame.size.height,
+                                                 width: self.gsButtonVC!.view.frame.size.width,
+                                                 height: self.gsButtonVC!.view.frame.size.height)
+            self.gsButtonVC!.delegate = self
+            self.view.addSubview(self.gsButtonVC!.view)
+        }
+
+        self.waypointConfigVC = WaypointConfigViewController()
+
     //    self.waypointConfigVC.view.alpha = 0;
+        self.waypointConfigVC?.view.alpha = 0
     //    self.waypointConfigVC.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
+        self.waypointConfigVC?.view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
     //
     //    [self.waypointConfigVC.view setCenter:self.view.center];
+        self.waypointConfigVC?.view.center = self.view.center
     //
     //    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) //Check if it's using iPad and center the config view
     //    {
     //        self.waypointConfigVC.view.center = self.view.center;
     //    }
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            self.waypointConfigVC?.view.center = self.view.center
+        }
+        
     //
     //    self.waypointConfigVC.delegate = self;
+        self.waypointConfigVC?.delegate = self
     //    [self.view addSubview:self.waypointConfigVC.view];
+        if self.waypointConfigVC != nil {//TODO: reconsider method of unwrapping...
+            self.view.addSubview(self.waypointConfigVC!.view)
+        }
     }
 
     func registerApp() {
@@ -118,17 +141,18 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     
     //MARK: DJISDKManagerDelegate Methods
     func appRegisteredWithError(_ error: Error?) {
-        //    if (error){
-        //        NSString *registerResult = [NSString stringWithFormat:@"Registration Error:%@", error.description];
-        //        ShowMessage(@"Registration Result", registerResult, nil, @"OK");
-        //    }
-        //    else{
-        //#if ENTER_DEBUG_MODE
-        //        [DJISDKManager enableBridgeModeWithBridgeAppIP:@"192.168.128.169"];
-        //#else
-        //        [DJISDKManager startConnectionToProduct];
-        //#endif
-        //    }
+        if let error = error {
+            //        NSString *registerResult = [NSString stringWithFormat:@"Registration Error:%@", error.description];
+            //        ShowMessage(@"Registration Result", registerResult, nil, @"OK");
+            let registerResult = String(format: "Registration Error:%@", error.localizedDescription)
+            DemoUtility.show(result: registerResult)
+        } else {
+            if useBridgeMode {
+                DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeIPString)
+            } else {
+                DJISDKManager.startConnectionToProduct()
+            }
+        }
     }
     
     func productConnected(_ product: DJIBaseProduct?) {
@@ -152,47 +176,50 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         return DJISDKManager.missionControl()?.waypointMissionOperator()
     }
     
-    //
     func focusMap() {
-        //    if (CLLocationCoordinate2DIsValid(self.droneLocation)) {
-        //        MKCoordinateRegion region = {0};
-        //        region.center = self.droneLocation;
-        //        region.span.latitudeDelta = 0.001;
-        //        region.span.longitudeDelta = 0.001;
-        //
-        //        [self.mapView setRegion:region animated:YES];
-        //    }
+        guard let droneLocation = self.droneLocation else {
+            return
+        }
+        
+        if CLLocationCoordinate2DIsValid(droneLocation) {
+            let center = CLLocationCoordinate2D(latitude: droneLocation.latitude, longitude: droneLocation.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+            let region = MKCoordinateRegion(center: center, span: span)
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     //
     //MARK:  CLLocation Methods
     func startUpdateLocation() {
-    //    if ([CLLocationManager locationServicesEnabled]) {
-    //        if (self.locationManager == nil) {
-    //            self.locationManager = [[CLLocationManager alloc] init];
-    //            self.locationManager.delegate = self;
-    //            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    //            self.locationManager.distanceFilter = 0.1;
+        if CLLocationManager.locationServicesEnabled() {
+            if self.locationManager == nil {
+                self.locationManager = CLLocationManager()
+                //            self.locationManager.delegate = self;
+                self.locationManager?.delegate = self
+                //            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+                self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+                //            self.locationManager.distanceFilter = 0.1;
+                self.locationManager?.distanceFilter = 0.1
+                //TODO: need to check if you can requestAlwaysAuthorization? seems it should always have that method...
     //            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
     //                [self.locationManager requestAlwaysAuthorization];
     //            }
-    //            [self.locationManager startUpdatingLocation];
-    //        }
-    //    }else
-    //    {
-    //        ShowMessage(@"Location Service is not available", @"", nil, @"OK");
-    //    }
+                    self.locationManager?.requestAlwaysAuthorization()
+            }
+        } else {
+            DemoUtility.show(result: "Location Service is not available")
+        }
+
     }
-    //
+
     //MARK:  UITapGestureRecognizer Methods
-    //- (void)addWaypoints:(UITapGestureRecognizer *)tapGesture
-    func addWaypints(tapGesture:UITapGestureRecognizer) {
-        //    CGPoint point = [tapGesture locationInView:self.mapView];
-        //
-        //    if(tapGesture.state == UIGestureRecognizerStateEnded){
-        //        if (self.isEditingPoints) {
-        //            [self.mapController addWithPoint:point for:self.mapView];
-        //        }
-        //    }
+    @objc func addWaypints(tapGesture:UITapGestureRecognizer) {
+        let point = tapGesture.location(in: self.mapView)
+        if tapGesture.state == UIGestureRecognizer.State.ended {
+            if self.isEditingPoints {
+                self.mapController?.add(point: point, for: self.mapView)
+            }
+        }
     }
     
     //MARK - DJIWaypointConfigViewControllerDelegate Methods
@@ -211,8 +238,8 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     //    [self presentViewController:alert animated:YES completion:nil];
     //}
     
-    func showAlertViewWith(title:String, message:String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    func showAlertViewWith(title:String, message:String?) {
+        let alert = UIAlertController(title: title, message: message ?? "", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -225,61 +252,70 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         //        WeakReturn(weakSelf);
         //        weakSelf.waypointConfigVC.view.alpha = 0;
         //    }];
+        
+        UIView.animate(withDuration: 0.25) { [weak self] () in
+            self?.waypointConfigVC?.view.alpha = 0
+        }
         //
         //    for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         //        DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
         //        waypoint.altitude = [self.waypointConfigVC.altitudeTextField.text floatValue];
         //    }
-        //
-        //    self.waypointMission.maxFlightSpeed = [self.waypointConfigVC.maxFlightSpeedTextField.text floatValue];
-        //    self.waypointMission.autoFlightSpeed = [self.waypointConfigVC.autoFlightSpeedTextField.text floatValue];
-        //    self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
-        //    [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
-        //
-        //    [[self missionOperator] loadMission:self.waypointMission];
-        //
-        //    WeakRef(target);
-        //
-        //    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
-        //
-        //        WeakReturn(target);
-        //
-        //        if (error) {
-        //            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
-        //        }
-        //        else {
-        //            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
-        //        }
-        //    }];
-        //
-        //    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
-        //        if (error){
-        //            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-        //            ShowMessage(@"", uploadError, nil, @"OK");
-        //        }else {
-        //            ShowMessage(@"", @"Upload Mission Finished", nil, @"OK");
-        //        }
-        //    }];
+        if let waypointMission = self.waypointMission, let waypointConfigVC = self.waypointConfigVC {
+            for waypoint in waypointMission.allWaypoints() {
+                waypoint.altitude = (waypointConfigVC.altitudeTextField.text! as NSString).floatValue//TODO: test empty string?
+            }
+        }
+
+        if let waypointConfigVC = self.waypointConfigVC {
+            self.waypointMission?.maxFlightSpeed = ((self.waypointConfigVC?.maxFlightSpeedTextField.text ?? "0.0") as NSString).floatValue
+            self.waypointMission?.autoFlightSpeed = ((self.waypointConfigVC?.autoFlightSpeedTextField.text ?? "0.0") as NSString).floatValue
+            
+            let selectedHeadingIndex = waypointConfigVC.headingSegmentedControl.selectedSegmentIndex
+            self.waypointMission?.headingMode = DJIWaypointMissionHeadingMode(rawValue:UInt(selectedHeadingIndex)) ?? DJIWaypointMissionHeadingMode.auto
+            
+            let selectedActionIndex = waypointConfigVC.actionSegmentedControl.selectedSegmentIndex
+            self.waypointMission?.finishedAction = DJIWaypointMissionFinishedAction(rawValue: UInt8(selectedActionIndex)) ?? DJIWaypointMissionFinishedAction.noAction
+        }
+        
+        if let waypointMission = self.waypointMission {
+            self.missionOperator()?.load(waypointMission)
+            
+            self.missionOperator()?.addListener(toFinished: self, with: DispatchQueue.main, andBlock: { [weak self] (error: Error?) in
+                if let error = error {
+                    self?.showAlertViewWith(title: "Mission Execution Failed", message: String(format: "%@", error.localizedDescription))
+                } else {
+                    self?.showAlertViewWith(title: "Mission Execution Finished", message: nil)
+                }
+            })
+        }
+        
+        self.missionOperator()?.uploadMission(completion: { (error:Error?) in
+            if let error = error {
+                let uploadErrorString = String(format: "Upload Mission failed:%@", error.localizedDescription)
+                DemoUtility.show(result: uploadErrorString)
+            } else {
+                DemoUtility.show(result: "Upload Mission Finished")
+            }
+        })
     }
     
-    //TODO: mark not showing? implement everywhere...
-    //MARK - DJIGSButtonViewController Delegate Methods
+    //MARK: - DJIGSButtonViewController Delegate Methods
     func stopBtnActionIn(gsBtnVC: GSButtonViewController) {
-    //    [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
-    //        if (error){
-    //            NSString* failedMessage = [NSString stringWithFormat:@"Stop Mission Failed: %@", error.description];
-    //            ShowMessage(@"", failedMessage, nil, @"OK");
-    //        }else
-    //        {
-    //            ShowMessage(@"", @"Stop Mission Finished", nil, @"OK");
-    //        }
-    //
-    //    }];
+        self.missionOperator()?.stopMission(completion: { (error:Error?) in
+            if let error = error {
+  //            NSString* failedMessage = [NSString stringWithFormat:@"Stop Mission Failed: %@", error.description];
+  //            ShowMessage(@"", failedMessage, nil, @"OK");
+                let failedMessage = String(format: "Stop Mission Failed: %@", error.localizedDescription)
+                DemoUtility.show(result: failedMessage)
+            } else {
+                DemoUtility.show(result: "Stop Mission Finished")
+            }
+        })
     }
     
     func clearBtnActionIn(gsBtnVC: GSButtonViewController) {
-        //    //[self.mapController cleanAllPointsWithMapView:self.mapView];
-        //    [self.mapController cleanAllPointsWith:self.mapView];
+        self.mapController?.cleanAllPoints(with: self.mapView)
     }
     
     func focusMapBtnActionIn(gsBtnVC: GSButtonViewController) {
@@ -289,23 +325,29 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     func startBtnActionIn(gsBtnVC: GSButtonViewController) {
         //    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
         //        if (error){
-        //            ShowMessage(@"Start Mission Failed", error.description, nil, @"OK");
         //        }else
         //        {
         //            ShowMessage(@"", @"Mission Started", nil, @"OK");
         //        }
         //    }];
+        self.missionOperator()?.startMission(completion: { (error:Error?) in
+            if let error = error {
+                //            ShowMessage(@"Start Mission Failed", error.description, nil, @"OK");
+                DemoUtility.show(result: String(format:"Start Mission Failed: %@", error.localizedDescription))
+            } else {
+                DemoUtility.show(result: "Mission Started")
+            }
+        })
     }
     
     func add(button: UIButton, actionIn gsBtnVC: GSButtonViewController) {
-        //    if (self.isEditingPoints) {
-        //        self.isEditingPoints = NO;
-        //        [button setTitle:@"Add" forState:UIControlStateNormal];
-        //    }else
-        //    {
-        //        self.isEditingPoints = YES;
-        //        [button setTitle:@"Finished" forState:UIControlStateNormal];
-        //    }
+        if self.isEditingPoints {
+            self.isEditingPoints = false
+            button.setTitle("Add", for: UIControl.State.normal)
+        } else {
+            self.isEditingPoints = true
+            button.setTitle("Finished", for: UIControl.State.normal)
+        }
     }
     
     func configBtnActionIn(gsBtnVC: GSButtonViewController) {
@@ -316,69 +358,81 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         //        ShowMessage(@"No or not enough waypoints for mission", @"", nil, @"OK");
         //        return;
         //    }
-        //
-        //    [UIView animateWithDuration:0.25 animations:^{
-        //        WeakReturn(weakSelf);
-        //        weakSelf.waypointConfigVC.view.alpha = 1.0;
-        //    }];
-        //
-        //    if (self.waypointMission){
-        //        [self.waypointMission removeAllWaypoints];
-        //    }
-        //    else{
-        //        self.waypointMission = [[DJIMutableWaypointMission alloc] init];
-        //    }
-        //
-        //    for (int i = 0; i < wayPoints.count; i++) {
-        //        CLLocation* location = [wayPoints objectAtIndex:i];
-        //        if (CLLocationCoordinate2DIsValid(location.coordinate)) {
-        //            DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
-        //            [self.waypointMission addWaypoint:waypoint];
-        //        }
-        //    }
+        
+        
+        guard let wayPoints = self.mapController?.editPoints else {
+            DemoUtility.show(result: "No waypoints")
+            return
+        }
+        if wayPoints.count < 2 {
+            DemoUtility.show(result: "Not enough waypoints for mission")
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) { [weak self] () in
+            self?.waypointConfigVC?.view.alpha = 1.0
+        }
+
+        self.waypointMission?.removeAllWaypoints()
+        
+        if self.waypointMission == nil {
+            self.waypointMission = DJIMutableWaypointMission()
+        }
+        
+        for location in wayPoints {
+            if CLLocationCoordinate2DIsValid(location.coordinate) {
+                self.waypointMission?.add(DJIWaypoint(coordinate: location.coordinate))
+            }
+        }
+        
     }
     
     func switchTo(mode: GSViewMode, inGSBtnVC: GSButtonViewController) {
-        //    if (mode == GSViewModeEdit) {
-        //        [self focusMap];
-        //    }
+        if mode == GSViewMode.edit {
+            self.focusMap()
+        }
     }
     
     //
     //MARK:  - CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //    CLLocation* location = [locations lastObject];
-        //    self.userLocation = location.coordinate;
+        self.userLocation = locations.last?.coordinate
     }
     
     //MARK:  MKMapViewDelegate Method
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation.isKind(of: MKPointAnnotation.self) {
-            //        MKPinAnnotationView* pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin_Annotation"];
-            //        pinView.pinTintColor = [UIColor purpleColor];
-            //        return pinView;
+            let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin_Annotation")
+            pinView.pinTintColor = UIColor.purple
+            return pinView
         } else if annotation.isKind(of: AircraftAnnotation.self) {
-            //        AircraftAnnotationView *annoView = [[AircraftAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Aircraft_Annotation"];
-            //        ((AircraftAnnotation*)annotation).annotationView = annoView;
-            //        return annoView;
+            let annotationView = AircraftAnnotationView(annotation: annotation, reuseIdentifier: "Aircraft_Annotation")
+            (annotation as? AircraftAnnotation)?.annotationView = annotationView
+            return annotationView
         }
         return nil
     }
 
     //MARK:  DJIFlightControllerDelegate
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
-        //    self.droneLocation = state.aircraftLocation.coordinate;
-        //    self.modeLabel.text = state.flightModeString;
-        //    self.gpsLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)state.satelliteCount];
-        //    self.vsLabel.text = [NSString stringWithFormat:@"%0.1f M/S",state.velocityZ];
-        //    self.hsLabel.text = [NSString stringWithFormat:@"%0.1f M/S",(sqrtf(state.velocityX*state.velocityX + state.velocityY*state.velocityY))];
-        //    self.altitudeLabel.text = [NSString stringWithFormat:@"%0.1f M",state.altitude];
+        self.droneLocation = state.aircraftLocation?.coordinate
+        self.modeLabel.text = state.flightModeString
+        self.gpsLabel.text = String(format: "@lu", UInt(state.satelliteCount))
+        self.vsLabel.text = String(format: "@0.1f M/S", state.velocityZ)
+        self.hsLabel.text = String(format: "@0.1f M/S", sqrt(pow(state.velocityX,2) + pow(state.velocityY,2)))
+        self.altitudeLabel.text = String(format: "%0.1f M", state.altitude)
+        
         //
         //    //[self.mapController updateAircraftLocation:self.droneLocation withMapView:self.mapView];
-        //    [self.mapController updateAircraftWithLocation:self.droneLocation with:self.mapView];
         //    double radianYaw = RADIAN(state.attitude.yaw);
         //    //[self.mapController updateAircraftHeading:radianYaw];
         //    [self.mapController updateAircraftHeadingWithHeading:radianYaw];
+        
+        if let droneLocation = droneLocation {
+            self.mapController?.updateAircraft(location: droneLocation, with: self.mapView)
+        }
+        let radianYaw = state.attitude.yaw.degreesToRadians
+        self.mapController?.updateAircraftHeading(heading: Float(radianYaw))
     }
 
     func didUpdateDatabaseDownloadProgress(_ progress: Progress) {
