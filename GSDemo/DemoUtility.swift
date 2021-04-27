@@ -28,8 +28,8 @@ class DemoUtility: NSObject {
             let alertViewController = UIAlertController(title: nil, message: result as String, preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default, handler: nil)
             alertViewController.addAction(okAction)
-            let navController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-            navController.present(alertViewController, animated: true, completion: nil)
+            let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+            rootViewController?.present(alertViewController, animated: true, completion: nil)
         }
     }
     

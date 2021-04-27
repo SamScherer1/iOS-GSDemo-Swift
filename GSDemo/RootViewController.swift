@@ -417,9 +417,9 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         self.droneLocation = state.aircraftLocation?.coordinate
         self.modeLabel.text = state.flightModeString
-        self.gpsLabel.text = String(format: "@lu", UInt(state.satelliteCount))
-        self.vsLabel.text = String(format: "@0.1f M/S", state.velocityZ)
-        self.hsLabel.text = String(format: "@0.1f M/S", sqrt(pow(state.velocityX,2) + pow(state.velocityY,2)))
+        self.gpsLabel.text = String(state.satelliteCount)
+        self.vsLabel.text = String(format: "%0.1f M/S", state.velocityZ)
+        self.hsLabel.text = String(format: "%0.1f M/S", sqrt(pow(state.velocityX,2) + pow(state.velocityY,2)))
         self.altitudeLabel.text = String(format: "%0.1f M", state.altitude)
         
         //

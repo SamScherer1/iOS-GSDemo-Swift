@@ -46,12 +46,10 @@ class WaypointConfigViewController : UIViewController {
     }
 
     @IBAction func cancelBtnAction(_ sender: Any) {
-        //TODO: getting an unrecognized selector calling from swift to Objc, convert DJIRootViewController next...
-        //self.delegate?.cancelBtnActionInDJIWaypointConfigViewController(viewController:self)
+        self.delegate?.cancelBtnActionInDJIWaypointConfigViewController(viewController:self)
     }
 
     @IBAction func finishBtnAction(_ sender: Any) {
-        //TODO: getting an unrecognized selector calling from swift to Objc, convert DJIRootViewController next...
-        //self.delegate?.finishBtnActionInDJIWaypointConfigViewController(viewController: self)
+        self.delegate?.finishBtnActionInDJIWaypointConfigViewController(viewController: self)
     }
 }
