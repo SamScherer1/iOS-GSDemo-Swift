@@ -25,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0203E5861C9C0B5F00A69BCF /* GSDemo-pch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSDemo-pch.pch"; sourceTree = "<group>"; };
 		3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotationView.swift; sourceTree = "<group>"; };
 		3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftAnnotation.swift; sourceTree = "<group>"; };
 		3AD98DC7263613B3008C47F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				A44305471DA88CF3009C1370 /* GSDemo.entitlements */,
-				3AD98DE226374A3D008C47F3 /* RootViewController.swift */,
 				3AD98DC7263613B3008C47F3 /* AppDelegate.swift */,
+				3AD98DE226374A3D008C47F3 /* RootViewController.swift */,
 				3AD98DBA26360EFA008C47F3 /* AircraftAnnotation.swift */,
 				3AD98DAD26360529008C47F3 /* AircraftAnnotationView.swift */,
 				3AD98DD226362669008C47F3 /* MapController.swift */,
@@ -104,22 +103,13 @@
 				A4507F251CB506D40037861C /* GSButtonViewController.xib */,
 				3AD98DCC26361569008C47F3 /* WaypointConfigViewController.swift */,
 				A4507F281CB506D40037861C /* WaypointConfigViewController.xib */,
-				A4E86B7F1B4A374300F204DA /* Main.storyboard */,
-				A4E86B821B4A374300F204DA /* Images.xcassets */,
-				A4E86B841B4A374300F204DA /* LaunchScreen.xib */,
-				A4E86B751B4A374300F204DA /* Supporting Files */,
 				3AD98DE626375836008C47F3 /* DemoUtility.swift */,
-			);
-			path = GSDemo;
-			sourceTree = "<group>";
-		};
-		A4E86B751B4A374300F204DA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0203E5861C9C0B5F00A69BCF /* GSDemo-pch.pch */,
+				A4E86B7F1B4A374300F204DA /* Main.storyboard */,
+				A4E86B841B4A374300F204DA /* LaunchScreen.xib */,
+				A4E86B821B4A374300F204DA /* Images.xcassets */,
 				A4E86B761B4A374300F204DA /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = GSDemo;
 			sourceTree = "<group>";
 		};
 		A4E86B8E1B4A374300F204DA /* GSDemoTests */ = {
