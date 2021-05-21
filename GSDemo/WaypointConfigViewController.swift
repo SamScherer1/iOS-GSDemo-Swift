@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-protocol WaypointConfigViewControllerDelegate : class {
-    //TODO: static funcs only? why? Also, can use properties with {get} only?
+protocol WaypointConfigViewControllerDelegate : AnyObject {
     func cancelBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
     func finishBtnActionInDJIWaypointConfigViewController(viewController : WaypointConfigViewController)
 }

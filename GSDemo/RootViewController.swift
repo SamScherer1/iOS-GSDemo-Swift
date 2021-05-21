@@ -25,7 +25,7 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     var locationManager : CLLocationManager?
     var userLocation : CLLocationCoordinate2D?
     var droneLocation : CLLocationCoordinate2D?
-    var tapGesture : UITapGestureRecognizer?
+    //var tapGesture : UITapGestureRecognizer?
     var waypointMission : DJIMutableWaypointMission?
 
     @IBOutlet weak var mapView: MKMapView!
@@ -63,9 +63,8 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.userLocation = kCLLocationCoordinate2DInvalid
         self.droneLocation = kCLLocationCoordinate2DInvalid
         self.mapController = MapController()
-        self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(addWaypints(tapGesture:)))
-        self.mapView.addGestureRecognizer(self.tapGesture!)//TODO: reconsider force unwrap
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addWaypints(tapGesture:)))
+        self.mapView.addGestureRecognizer(tapGesture)
     }
     
     func initUI() {
@@ -75,14 +74,13 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.hsLabel.text = "0.0 M/S"
         self.altitudeLabel.text = "0 M"
         
-        //TODO: make a designated init for GSButtonViewController so as to not break encapsulation...
-        self.gsButtonVC = GSButtonViewController(nibName:"GSButtonViewController", bundle:Bundle.main)
-        if self.gsButtonVC != nil {//TODO: reconsider method of unwrapping property
-            self.gsButtonVC!.view.frame = CGRect(x: 0.0,
-                                                 y: self.topBarView.frame.origin.y + self.topBarView.frame.size.height,
-                                                 width: self.gsButtonVC!.view.frame.size.width,
-                                                 height: self.gsButtonVC!.view.frame.size.height)
-            self.gsButtonVC!.delegate = self
+        self.gsButtonVC = GSButtonViewController()
+        if let gsButtonVC = self.gsButtonVC {
+            gsButtonVC.view.frame = CGRect(x: 0.0,
+                                           y: self.topBarView.frame.origin.y + self.topBarView.frame.size.height,
+                                           width: self.gsButtonVC!.view.frame.size.width,
+                                           height: self.gsButtonVC!.view.frame.size.height)
+            gsButtonVC.delegate = self
             self.view.addSubview(self.gsButtonVC!.view)
         }
 
@@ -109,7 +107,7 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     func appRegisteredWithError(_ error: Error?) {
         if let error = error {
             let registerResult = "Registration Error: \(error.localizedDescription)"
-            DemoUtility.show(result: registerResult)
+            showAlertWith(registerResult)
         } else {
             if useBridgeMode {
                 DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeIPString)
@@ -120,10 +118,10 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     }
     
     func productConnected(_ product: DJIBaseProduct?) {
-        if let _ = product, let flightController = DemoUtility.fetchFlightController() {
+        if let _ = product, let flightController = fetchFlightController() {
             flightController.delegate = self
         } else {
-            DemoUtility.show(result: "Flight controller disconnected")
+            showAlertWith("Flight controller disconnected")
         }
         
         //If this demo is used in China, it's required to login to your DJI account to activate the application. Also you need to use DJI Go app to bind the aircraft to your DJI account. For more details, please check this demo's tutorial.
@@ -160,14 +158,10 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
                 self.locationManager?.delegate = self
                 self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
                 self.locationManager?.distanceFilter = 0.1
-                //TODO: need to check if you can requestAlwaysAuthorization? seems it should always have that method...
-    //            if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-    //                [self.locationManager requestAlwaysAuthorization];
-    //            }
-                    self.locationManager?.requestAlwaysAuthorization()
+                self.locationManager?.requestAlwaysAuthorization()
             }
         } else {
-            DemoUtility.show(result: "Location Service is not available")
+            showAlertWith("Location Service is not available")
         }
 
     }
@@ -204,7 +198,8 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         
         if let waypointMission = self.waypointMission, let waypointConfigVC = self.waypointConfigVC {
             for waypoint in waypointMission.allWaypoints() {
-                waypoint.altitude = (waypointConfigVC.altitudeTextField.text! as NSString).floatValue//TODO: test empty string?
+                let altitude = Float(waypointConfigVC.altitudeTextField.text ?? "20") ?? 20.0
+                waypoint.altitude = altitude
             }
         }
 
@@ -234,9 +229,9 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.missionOperator()?.uploadMission(completion: { (error:Error?) in
             if let error = error {
                 let uploadErrorString = "Upload Mission failed:\( error.localizedDescription)"
-                DemoUtility.show(result: uploadErrorString)
+                showAlertWith(uploadErrorString)
             } else {
-                DemoUtility.show(result: "Upload Mission Finished")
+                showAlertWith("Upload Mission Finished")
             }
         })
     }
@@ -246,9 +241,9 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.missionOperator()?.stopMission(completion: { (error:Error?) in
             if let error = error {
                 let failedMessage = "Stop Mission Failed: \(error.localizedDescription)"
-                DemoUtility.show(result: failedMessage)
+                showAlertWith(failedMessage)
             } else {
-                DemoUtility.show(result: "Stop Mission Finished")
+                showAlertWith("Stop Mission Finished")
             }
         })
     }
@@ -264,10 +259,9 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     func startBtnActionIn(gsBtnVC: GSButtonViewController) {
         self.missionOperator()?.startMission(completion: { (error:Error?) in
             if let error = error {
-                //            ShowMessage(@"Start Mission Failed", error.description, nil, @"OK");
-                DemoUtility.show(result: "Start Mission Failed: \(error.localizedDescription)")
+                showAlertWith("Start Mission Failed: \(error.localizedDescription)")
             } else {
-                DemoUtility.show(result: "Mission Started")
+                showAlertWith("Mission Started")
             }
         })
     }
@@ -284,11 +278,11 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     
     func configBtnActionIn(gsBtnVC: GSButtonViewController) {
         guard let wayPoints = self.mapController?.editPoints else {
-            DemoUtility.show(result: "No waypoints")
+            showAlertWith("No waypoints")
             return
         }
         if wayPoints.count < 2 {
-            DemoUtility.show(result: "Not enough waypoints for mission")
+            showAlertWith("Not enough waypoints for mission")
             return
         }
         
@@ -340,7 +334,6 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.droneLocation = state.aircraftLocation?.coordinate
         self.modeLabel.text = state.flightModeString
         self.gpsLabel.text = String(state.satelliteCount)
-        //TODO: String interpolation version of 0.1f format string?
         self.vsLabel.text = String(format: "%0.1f M/S", state.velocityZ)
         self.hsLabel.text = String(format: "%0.1f M/S", sqrt(pow(state.velocityX,2) + pow(state.velocityY,2)))
         self.altitudeLabel.text = String(format: "%0.1f M", state.altitude)

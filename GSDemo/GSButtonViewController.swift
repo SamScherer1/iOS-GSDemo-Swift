@@ -14,7 +14,7 @@ enum GSViewMode {
     case edit
 }
 
-protocol GSButtonViewControllerDelegate : class{
+protocol GSButtonViewControllerDelegate : AnyObject {
     func stopBtnActionIn(gsBtnVC:GSButtonViewController)
     func clearBtnActionIn(gsBtnVC:GSButtonViewController)
     func focusMapBtnActionIn(gsBtnVC:GSButtonViewController)
@@ -33,12 +33,23 @@ class GSButtonViewController : UIViewController {
     @IBOutlet weak var startBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var configBtn: UIButton!
-    var mode = GSViewMode.edit
+    var mode = GSViewMode.view
     var delegate : GSButtonViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: need to set initial mode after super call?
+    }
+    
+    init() {
+        super.init(nibName:"GSButtonViewController", bundle:Bundle.main)
+    }
+    
+    convenience override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.init()
+    }
+    
+    convenience required init?(coder: NSCoder) {
+        self.init()
     }
     
     //MARK - Property Method
@@ -54,61 +65,39 @@ class GSButtonViewController : UIViewController {
         self.configBtn.isHidden = (mode == GSViewMode.view)
     }
         
-    //MARK - IBAction Methods
+    //MARK: - IBAction Methods
     @IBAction func backBtnAction(_ sender: Any) {
         self.setMode(mode: GSViewMode.view)
         self.delegate?.switchTo(mode: self.mode, inGSBtnVC: self)
     }
     
     @IBAction func stopBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(stopBtnActionInGSButtonVC:)]) {
-        //        [_delegate stopBtnActionInGSButtonVC:self];
-        //    }
         self.delegate?.stopBtnActionIn(gsBtnVC: self)
     }
     
     @IBAction func clearBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(clearBtnActionInGSButtonVC:)]) {
-        //        [_delegate clearBtnActionInGSButtonVC:self];
-        //    }
         self.delegate?.clearBtnActionIn(gsBtnVC: self)
     }
     
     @IBAction func focusMapBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(focusMapBtnActionInGSButtonVC:)]) {
-        //        [_delegate focusMapBtnActionInGSButtonVC:self];
-        //    }
         self.delegate?.focusMapBtnActionIn(gsBtnVC: self)
     }
     
     @IBAction func editBtnAction(_ sender: Any) {
-        //    [self setMode:DJIGSViewMode_EditMode];
-        //    if ([_delegate respondsToSelector:@selector(switchToMode:inGSButtonVC:)]) {
-        //        [_delegate switchToMode:self.mode inGSButtonVC:self];
-        //    }
         self.setMode(mode: GSViewMode.edit)
         self.delegate?.switchTo(mode: self.mode, inGSBtnVC: self)
     }
     
     @IBAction func startBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(startBtnActionInGSButtonVC:)]) {
-        //        [_delegate startBtnActionInGSButtonVC:self];
-        //    }
         self.delegate?.startBtnActionIn(gsBtnVC: self)
     }
     
     @IBAction func addBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(addBtn:withActionInGSButtonVC:)]) {
-        //        [_delegate addBtn:self.addBtn withActionInGSButtonVC:self];
-        //    }
         self.delegate?.add(button: self.addBtn, actionIn: self)
     }
     
 
     @IBAction func configBtnAction(_ sender: Any) {
-        //    if ([_delegate respondsToSelector:@selector(configBtnActionInGSButtonVC:)]) {
-        //        [_delegate configBtnActionInGSButtonVC:self];
-        //    }
         self.delegate?.configBtnActionIn(gsBtnVC: self)
     }
     
