@@ -3,7 +3,7 @@
 //  GSDemo
 //
 //  Created by Samuel Scherer on 4/26/21.
-//  Copyright © 2021 DJI. All rights reserved.
+//  Copyright © 2021 RIIS. All rights reserved.
 //
 
 import Foundation
@@ -15,7 +15,7 @@ import DJISDK
 
 class RootViewController : UIViewController, GSButtonViewControllerDelegate, WaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate {
     
-    fileprivate let useBridgeMode = true
+    fileprivate let useBridgeMode = false
     fileprivate let bridgeIPString = "192.168.128.169"
 
     var isEditingPoints = false
@@ -25,7 +25,6 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
     var locationManager : CLLocationManager?
     var userLocation : CLLocationCoordinate2D?
     var droneLocation : CLLocationCoordinate2D?
-    //var tapGesture : UITapGestureRecognizer?
     var waypointMission : DJIMutableWaypointMission?
 
     @IBOutlet weak var mapView: MKMapView!
