@@ -96,10 +96,7 @@ class GSButtonViewController : UIViewController {
         self.delegate?.add(button: self.addBtn, actionIn: self)
     }
     
-
     @IBAction func configBtnAction(_ sender: Any) {
         self.delegate?.configBtnActionIn(gsBtnVC: self)
     }
-    
-    
 }

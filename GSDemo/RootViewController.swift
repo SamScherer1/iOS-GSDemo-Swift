@@ -62,7 +62,7 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         self.userLocation = kCLLocationCoordinate2DInvalid
         self.droneLocation = kCLLocationCoordinate2DInvalid
         self.mapController = MapController()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addWaypints(tapGesture:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addWaypoints(tapGesture:)))
         self.mapView.addGestureRecognizer(tapGesture)
     }
     
@@ -131,7 +131,6 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         }
     }
     
-    //MARK: Action Methods
     func missionOperator() -> DJIWaypointMissionOperator? {
         return DJISDKManager.missionControl()?.waypointMissionOperator()
     }
@@ -162,11 +161,10 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         } else {
             showAlertWith("Location Service is not available")
         }
-
     }
 
     //MARK:  UITapGestureRecognizer Methods
-    @objc func addWaypints(tapGesture:UITapGestureRecognizer) {
+    @objc func addWaypoints(tapGesture:UITapGestureRecognizer) {
         let point = tapGesture.location(in: self.mapView)
         if tapGesture.state == UIGestureRecognizer.State.ended {
             if self.isEditingPoints {
@@ -175,7 +173,7 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
         }
     }
     
-    //MARK - DJIWaypointConfigViewControllerDelegate Methods
+    //MARK - WaypointConfigViewControllerDelegate Methods
     func cancelBtnActionInDJIWaypointConfigViewController(viewController: WaypointConfigViewController) {
         UIView.animate(withDuration: 0.25) { [weak self] () in
             self?.waypointConfigVC?.view.alpha = 0
@@ -291,16 +289,13 @@ class RootViewController : UIViewController, GSButtonViewControllerDelegate, Way
 
         self.waypointMission?.removeAllWaypoints()
         
-        if self.waypointMission == nil {
-            self.waypointMission = DJIMutableWaypointMission()
-        }
+        self.waypointMission = self.waypointMission ?? DJIMutableWaypointMission()
         
         for location in wayPoints {
             if CLLocationCoordinate2DIsValid(location.coordinate) {
                 self.waypointMission?.add(DJIWaypoint(coordinate: location.coordinate))
             }
         }
-        
     }
     
     func switchTo(mode: GSViewMode, inGSBtnVC: GSButtonViewController) {
